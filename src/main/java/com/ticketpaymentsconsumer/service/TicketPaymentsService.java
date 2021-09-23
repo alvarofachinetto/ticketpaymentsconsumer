@@ -24,7 +24,7 @@ public class TicketPaymentsService {
 
         validation(ticketRecivedKafka);
 
-        ticketRecivedKafka.calculateTotal();
+        ticketRecivedKafka.setTotal(ticketRecivedKafka.calculateTotal());
 
         ticketPaymentsRepository.save(ticketRecivedKafka);
 
