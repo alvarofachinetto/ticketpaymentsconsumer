@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -35,13 +34,13 @@ public class Ticket {
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     @NotNull
     private Integer amount;
 
     @NotNull
-    private BigDecimal price;
+    private Double price;
 
     @NotNull
     private BigDecimal total;
@@ -50,6 +49,6 @@ public class Ticket {
     private Payment payment;
 
     public BigDecimal calculateTotal(){
-        return new BigDecimal(amount).multiply(price);
+        return new BigDecimal(amount).multiply(new BigDecimal(price));
     }
 }

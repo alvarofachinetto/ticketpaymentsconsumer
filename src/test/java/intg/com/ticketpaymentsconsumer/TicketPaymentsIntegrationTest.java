@@ -24,6 +24,7 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.test.context.TestPropertySource;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -80,7 +81,7 @@ class TicketPaymentsIntegrationTest {
     }
 
     @Test
-    void postNewTicketPayment() throws JsonProcessingException, ExecutionException, InterruptedException {
+    void postNewTicketPayment() throws IOException, ExecutionException, InterruptedException {
         Address address = Address.builder().
                 street("Av Jucelino Kubistcheck")
                 .number(25414)
@@ -94,11 +95,11 @@ class TicketPaymentsIntegrationTest {
 
         Ticket ticket = Ticket.builder()
                 .title("Cars 4")
-                .dateTime(LocalDateTime.of(2021,11,27,20,15))
+                .dateTime("2021-11-27 20:15")
                 .address(address)
                 .buyer(buyer)
                 .amount(1)
-                .price(new BigDecimal(15.35))
+                .price(15.35)
                 .payment(Payment.PAYPAL)
                 .build();
 
